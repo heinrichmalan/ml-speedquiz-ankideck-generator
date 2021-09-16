@@ -1,0 +1,3 @@
+alive-progress
+beautifulsoup4
+genanki
