@@ -56,10 +56,14 @@ def download_images(quiz_items: List[QuizItem]):
             bar()
 
 def get_page():
-    url = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRgw-mX_j0fMrk326-gniQqMXwM5n4gPvkfVtfqbMAGLnkFNlh4bVQhIJc8jX_3melXd-m-YmaPGC-9/pubhtml#"
+    url = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRgw-mX_j0fMrk326-gniQqMXwM5n4gPvkfVtfqbMAGLnkFNlh4bVQhIJc8jX_3melXd-m-YmaPGC-9"
     res = requests.get(url)
 
-    return soup(res.content, "html.parser")
+    if res.status_code == 200:
+        return soup(res.content, "html.parser")
+    else:
+        with open("spreadsheet_scraping/sheet.html", "r") as file:
+            return soup(file.read(), "html.parser")
 
 
 def mapper(item_html_tuple):
